@@ -9,6 +9,9 @@ const userSchema = new mongoose.Schema({
   passwordHashAndSalt: {
     type: String,
     required: true
+  },
+  name: {
+    type: String
   }
 });
 

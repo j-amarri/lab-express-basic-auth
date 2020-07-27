@@ -62,4 +62,29 @@ router.get('/private', routeAuthenticationGuard, (req, res) => {
   res.render('private');
 });
 
+router.get('/profile', routeAuthenticationGuard, (req, res) => {
+  res.render('profile');
+});
+
+router.post('/sign-out', (request, response) => {
+  request.session.destroy();
+  response.redirect('sign-in');
+});
+
+router.get('/edit', routeAuthenticationGuard, (req, res) => {
+  res.render('edit');
+});
+
+router.post('/edit', (req, res, next) => {
+  const id = req.user._id;
+  const data = req.body;
+  User.findByIdAndUpdate(id, { name: data.name })
+    .then(() => {
+      res.redirect('profile');
+    })
+    .catch(error => {
+      next(error);
+    });
+});
+
 module.exports = router;

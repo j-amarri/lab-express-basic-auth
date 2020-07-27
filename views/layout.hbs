@@ -5,11 +5,18 @@
     <link rel='stylesheet' href='/styles/style.css' />
   </head>
   <body>
-    {{{body}}}
     <nav>
+      {{#if user}}
+      <a href="/private">Private</a>
+      <form action="/sign-out" method="POST">
+        <button>Sign Out</button>
+      </form>
+    {{else}}
       <a href="/">Home</a>
       <a href="/sign-up">Sign Up</a>
       <a href="/sign-in">Sign In</a>
+    {{/if}}
     </nav>
+    {{{body}}}
   </body>
 </html>
